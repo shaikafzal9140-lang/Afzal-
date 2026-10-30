@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afzal Master</title>
+<style>
+body{font-family:Arial;background:#111;padding:12px;color:white}
+h1{text-align:center;text-decoration:underline;color:cyan}
+.card{background:#222;padding:15px;border-radius:15px;margin:12px 0;border-left:5px solid #22c55e}
+select,input{width:95%;padding:13px;margin:6px 0;border-radius:10px;font-size:17px}
+button{width:100%;padding:15px;background:#22c55e;color:black;font-weight:bold;border:none;border-radius:12px;font-size:19px}
+.ans{font-size:32px;color:yellow;text-align:center;margin-top:12px;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>Afzal Situation Master 🔥</h1>
+<div class="card">
+<b>Situation:</b>
+<select id="sit" onchange="change()">
+<option value="1">1: a * x^n (90 wala)</option>
+<option value="2">2: x^n wala</option>
+<option value="3">3: sin/cos wala</option>
+<option value="4">4: e^x / ln wala</option>
+<option value="5">5: Product wala</option>
+</select>
+</div>
+<div class="card">
+a:<input id="a" value="9" type="number">
+n:<input id="n" value="2" type="number">
+x:<input id="x" value="5" type="number">
+<button onclick="calc()">CALCULATE ▶️</button>
+<div id="res" class="ans">Ans=90</div>
+<div id="formula" style="text-align:center;color:#aaa">Formula: a * n * x^(n-1)</div>
+</div>
+<script>
+function change(){
+let s=sit.value,f=formula;
+if(s==1){f.innerHTML="a * n * x^(n-1) = 90";a.value=9;n.value=2;x.value=5;}
+if(s==2){f.innerHTML="n * x^(n-1)";a.value=1;n.value=9;x.value=2;}
+if(s==3){f.innerHTML="sin->cos, cos->-sin";a.value=1;}
+if(s==4){f.innerHTML="e^x->e^x, ln->1/x";a.value=1;}
+if(s==5){f.innerHTML="Product Rule";a.value=1;n.value=2;x.value=5;}
+}
+function calc(){
+let av=parseFloat(a.value),nv=parseFloat(n.value),xv=parseFloat(x.value),s=sit.value,R=0;
+if(s==1)R=av*nv*Math.pow(xv,nv-1);
+if(s==2)R=nv*Math.pow(xv,nv-1);
+if(s==3)R=Math.cos(xv);
+if(s==4)R=Math.exp(xv);
+if(s==5)R=nv*Math.pow(xv,nv-1)*Math.sin(xv)+Math.pow(xv,nv)*Math.cos(xv);
+res.innerHTML="Ans="+R.toFixed(4);
+}
+calc();
+</script>
+</body>
+</html>
