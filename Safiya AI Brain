@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOST KA NAAM AI BRAIN</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.js"></script>
+<style>
+body{font-family: sans-serif; background:#0f172a; color:white; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;}
+.card{background:#1e293b; padding:30px; border-radius:20px; width:90%; max-width:400px; box-shadow:0 0 20px #38bdf8; text-align:center;}
+input{width:90%; padding:12px; border-radius:10px; border:none; margin:15px 0; font-size:18px;}
+button{background:#38bdf8; color:black; font-weight:bold; padding:12px 25px; border:none; border-radius:10px; cursor:pointer; font-size:16px;}
+#result{margin-top:20px; font-size:22px; color:#22c55e; font-weight:bold; min-height:30px;}
+h2 span{color:#38bdf8;}
+</style>
+</head>
+<body>
+<div class="card">
+<h2><span>DOST KA NAAM</span> AI BRAIN</h2>
+<p>Koi bhi differentiation likho</p>
+<input type="text" id="input" placeholder="e.g. x^2 + sin(x)">
+<br>
+<button onclick="solve()">Solve Karo</button>
+<div id="result"></div>
+</div>
+
+<script>
+function solve(){
+  let q = document.getElementById('input').value;
+  try{
+    let ans = math.derivative(q, 'x').toString();
+    document.getElementById('result').innerText = "Answer: " + ans;
+  } catch(e){
+    document.getElementById('result').innerText = "Sahi se likho bhai!";
+  }
+}
+</script>
+</body>
+</html>
