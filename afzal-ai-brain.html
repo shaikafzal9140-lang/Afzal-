@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFZAL AI BRAIN</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+<style>
+body{background:#0f0f0f;color:white;font-family:sans-serif;padding:20px;text-align:center}
+h1{color:#00ff88}
+input{width:90%;padding:15px;font-size:18px;border-radius:10px;border:none;margin:10px}
+button{padding:15px 30px;background:#00ff88;color:black;font-weight:bold;border:none;border-radius:10px;font-size:18px}
+#ans{margin-top:20px;background:#1e1e1e;padding:20px;border-radius:15px;font-size:20px;min-height:100px}
+small{color:#aaa}
+</style>
+</head>
+<body>
+<h1>🧠 AFZAL AI BRAIN</h1>
+<small>Har Differentiation / Integration ka Answer</small><br><br>
+
+<input id="q" placeholder="Ex: x^2 + sin(x) , x^3 , e^x">
+<br>
+<button onclick="solve()">DIFFERENTIATE ✨</button>
+
+<div id="ans">Yahan Answer Ayega...</div>
+
+<script>
+function solve(){
+  let expr = document.getElementById('q').value;
+  if(!expr){alert('Pehle Question Likho!');return;}
+  try{
+    let result = math.derivative(expr, 'x').toString();
+    let simplified = math.simplify(result).toString();
+    document.getElementById('ans').innerHTML = 
+    `<b>Question:</b> d/dx [ ${expr} ]<br><br>
+     <b style='color:#00ff88'>Answer:</b><br>${simplified}<br><br>
+     <small>Step: Power Rule / Chain Rule applied</small>`;
+  }catch(e){
+    document.getElementById('ans').innerHTML = "Error! Sahi se likho Ex: x^2";
+  }
+}
+</script>
+</body>
+</html>
