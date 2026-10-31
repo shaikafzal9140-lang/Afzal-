@@ -2,32 +2,29 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Afzal Clipboard</title>
+<title>Afzal AI</title>
 <style>
-body{margin:0;font-family:sans-serif;min-height:100vh;background:linear-gradient(135deg,#7c3aed,#ec4899,#f59e0b,#06b6d4);padding:15px}
-h1{text-align:center;color:#fff;text-shadow:0 2px 10px #0005;font-size:26px}
-.box{max-width:600px;margin:12px auto;background:#ffffffE6;backdrop-filter:blur(20px);border-radius:18px;padding:14px;box-shadow:0 8px 30px #0002}
-.content{padding:12px;border-radius:14px;margin-top:8px;color:#111;font-weight:600;display:flex;justify-content:space-between;gap:10px;word-break:break-word}
-.c1{background:linear-gradient(90deg,#60a5fa,#a78bfa)} .c2{background:linear-gradient(90deg,#34d399,#06b6d4)} .c3{background:linear-gradient(90deg,#f472b6,#fbbf24)} .c4{background:linear-gradient(90deg,#fbbf24,#fb923c)}
-button.copy{background:#fff;border:0;padding:8px 14px;border-radius:10px;font-weight:800;color:#6d28d9}
-.input{position:fixed;bottom:0;left:0;right:0;background:#fffffff2;padding:12px;display:flex;gap:8px;box-shadow:0 -5px 20px #0002}
-.input input{flex:1;padding:12px 16px;border-radius:20px;border:2px solid #e9d5ff;outline:none}
-.input button{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;border:0;padding:12px 20px;border-radius:20px;font-weight:800}
+body{margin:0;font-family:sans-serif;min-height:100vh;background:linear-gradient(135deg,#7c3aed,#ec4899,#f59e0b);padding:15px}
+h1{text-align:center;color:#fff}
+.box{max-width:600px;margin:12px auto;background:#ffffffee;border-radius:18px;padding:14px;box-shadow:0 8px 30px #0002}
+.q{font-weight:800;padding:10px;border-radius:10px;background:linear-gradient(90deg,#60a5fa,#a78bfa);margin-bottom:8px}
+.a{padding:12px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;white-space:pre-wrap;color:#111;line-height:1.5}
+.input{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:12px;display:flex;gap:8px;box-shadow:0 -10px 20px #0002}
+.input input{flex:1;padding:14px;border-radius:20px;border:2px solid #e9d5ff;outline:none}
+.input button{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;border:0;padding:12px 22px;border-radius:20px;font-weight:800}
 </style>
 </head>
 <body>
-<h1>⚡ AFZAL CLIPBOARD</h1>
-<div class="box" style="display:flex;gap:8px">🔍 <input id="s" style="flex:1;border:0;background:transparent;outline:none" placeholder="Search clips..." oninput="show()"></div>
+<h1>⚡ AFZAL AI - AUTO ANSWER</h1>
+<div class="box" style="display:flex;gap:8px">🔍 <input id="s" style="flex:1;border:0;background:transparent;outline:none" placeholder="Search..." oninput="show()"></div>
 <div id="list" style="max-width:600px;margin:0 auto 100px;display:flex;flex-direction:column;gap:12px"></div>
-<div class="input"><input id="n" placeholder="Kuch bhi likh..."><button onclick="add()">ADD 🚀</button></div>
+<div class="input"><input id="n" placeholder="Question likh..."><button onclick="add()">ASK 🚀</button></div>
 <script>
-let a=JSON.parse(localStorage.getItem('af')||'[]');
-if(!a.length)a=[{t:"Explain quantum computing simply",g:"ChatGPT"},{t:"def fibonacci(n):\n a,b=0,1\n for _ in range(n):\n  a,b=b,a+b\n return a",g:"Code Snippet"},{t:"Draft: Thank you for your time, I'm excited to follow up...",g:"Email Draft"},{t:"• 2 cups flour\n• 1 tsp baking powder\n• 1 cup milk",g:"Recipe"}];
-function save(){localStorage.setItem('af',JSON.stringify(a));show()}
-function show(){let q=document.getElementById('s').value.toLowerCase();let l=document.getElementById('list');l.innerHTML='';a.filter(x=>x.t.toLowerCase().includes(q)||x.g.toLowerCase().includes(q)).forEach((x,i)=>{let c='c'+(i%4+1);l.innerHTML+=`<div class=box><div style=font-size:11px;color:#666>${x.g} • Just now</div><div class="content ${c}"><div style=white-space:pre-wrap;flex:1>${x.t}</div><button class=copy onclick="navigator.clipboard.writeText(\`${x.t.replace(/`/g,'')}\`);this.innerText='Copied!'">Copy</button></div></div>`})}
-function add(){let v=document.getElementById('n');if(!v.value.trim())return;a.unshift({t:v.value,g:"My Clip"});v.value='';save()}
+let a=JSON.parse(localStorage.getItem('af_ai')||'[]');
+function save(){localStorage.setItem('af_ai',JSON.stringify(a));show()}
+function show(){let q=document.getElementById('s').value.toLowerCase();let l=document.getElementById('list');l.innerHTML='';a.filter(x=>x.q.toLowerCase().includes(q)||x.a.toLowerCase().includes(q)).forEach((x,i)=>{l.innerHTML+=`<div class=box><div style="font-size:11px;color:#888">Q#${a.length-i} • ${x.time}</div><div class=q>❓ ${x.q}</div><div class=a>${x.a}</div><br><button onclick="navigator.clipboard.writeText(\`${x.a}\`);this.innerText='Copied!'" style="background:#111;color:#fff;border:0;padding:8px 14px;border-radius:8px;font-weight:800">Copy Ans</button> <button onclick="a.splice(${i},1);save()" style="background:#fee2e2;color:#c00;border:0;padding:8px 14px;border-radius:8px;font-weight:800">Delete</button></div>`})}
+async function add(){let inp=document.getElementById('n');let txt=inp.value.trim();if(!txt)return;let time=new Date().toLocaleTimeString();a.unshift({q:txt,a:`🤖 AI soch raha hai...`,time:time});inp.value='';save();try{let res=await fetch('https://text.pollinations.ai/'+encodeURIComponent(txt));let ans=await res.text();a[0].a=ans||"Try again!";}catch(e){a[0].a="Net slow hai. Ye sample answer hai: "+txt+" is a great question! Iska detailed answer AI dega jab net tez hoga.";}save();}
 show();
-document.getElementById('n').addEventListener('keypress',e=>{if(e.key==='Enter')add()});
 </script>
 </body>
 </html>
