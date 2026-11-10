@@ -1,0 +1,46 @@
+p<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afzal Ka Pass Fail Calculator</title>
+<style>
+body{background:#0f0f2a;color:white;font-family:Arial;text-align:center;padding:20px}
+.box{background:white;color:black;border-radius:20px;padding:20px;max-width:400px;margin:auto}
+input{width:90%;padding:12px;margin:8px 0;border:2px solid #ddd;border-radius:10px;text-align:center;font-size:18px}
+button{background:#ff5722;color:white;border:none;padding:14px 30px;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer;width:100%;margin-top:10px}
+#result{margin-top:15px;font-size:20px;font-weight:bold}
+.pass{color:green}.fail{color:red}
+</style>
+</head>
+<body>
+<h1>🎓 Afzal Ka Calculator</h1>
+<div class="box">
+<p>5 Subject ke Marks Daalo (100 me se)</p>
+<input type="number" id="s1" placeholder="Subject 1 - Maths">
+<input type="number" id="s2" placeholder="Subject 2 - Science">
+<input type="number" id="s3" placeholder="Subject 3 - English">
+<input type="number" id="s4" placeholder="Subject 4 - Hindi">
+<input type="number" id="s5" placeholder="Subject 5 - Social">
+<button onclick="calculate()">CALCULATE KARO!</button>
+<div id="result">Result yahan aayega...</div>
+<button onclick="location.reload()" style="background:#333">Naya Calculate 🔄</button>
+</div>
+<script>
+function calculate(){
+let m1=+document.getElementById('s1').value||0;
+let m2=+document.getElementById('s2').value||0;
+let m3=+document.getElementById('s3').value||0;
+let m4=+document.getElementById('s4').value||0;
+let m5=+document.getElementById('s5').value||0;
+let total=m1+m2+m3+m4+m5;
+let avg=total/5;
+let fail = m1<35||m2<35||m3<35||m4<35||m5<35;
+let grade = avg>=90?'A+':avg>=75?'A':avg>=60?'B':avg>=50?'C':avg>=35?'D':'F';
+let status = fail?'❌ FAIL':avg>=35?'✅ PASS':'❌ FAIL';
+let color = (fail||avg<35)?'fail':'pass';
+document.getElementById('result').innerHTML=`Total: ${total}/500<br>Average: ${avg.toFixed(2)}%<br>Grade: ${grade}<br><span class="${color}">${status}</span>`;
+}
+</script>
+</body>
+</html>ass-fail-calculator.html
