@@ -4,10 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Casio Calculator</title>
 <style>
-body{background:#222;text-align:center;font-family:sans-serif;padding:20px;color:white}
-.calc{background:#fff;color:#000;width:300px;margin:auto;padding:20px;border-radius:20px}
+*{box-sizing:border-box}
+body{background:#222;text-align:center;font-family:sans-serif;padding:10px;color:white;margin:0}
+.calc{background:#fff;color:#000;max-width:340px;width:100%;margin:auto;padding:15px;border-radius:20px}
 #d{width:100%;height:60px;font-size:30px;text-align:right;border:2px solid #000;border-radius:10px;margin-bottom:15px;padding:5px}
-button{width:65px;height:55px;font-size:22px;margin:4px;border-radius:10px;border:none;background:#eee}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+button{height:55px;font-size:22px;border-radius:10px;border:none;background:#eee}
 button:active{background:#ff5a1f;color:#fff}
 .eq{background:#ff5a1f;color:#fff}
 .clr{background:#ff3b30;color:#fff}
@@ -17,27 +19,28 @@ button:active{background:#ff5a1f;color:#fff}
 <h1>🧮 Casio Calculator</h1>
 <div class="calc">
 <input id="d" readonly>
-<br>
+<div class="grid">
 <button class="clr" onclick="c()">C</button>
 <button onclick="v('(')">(</button>
 <button onclick="v(')')">)</button>
-<button onclick="v('/')">÷</button><br>
+<button onclick="v('/')">÷</button>
 <button onclick="v('7')">7</button>
 <button onclick="v('8')">8</button>
 <button onclick="v('9')">9</button>
-<button onclick="v('*')">×</button><br>
+<button onclick="v('*')">×</button>
 <button onclick="v('4')">4</button>
 <button onclick="v('5')">5</button>
 <button onclick="v('6')">6</button>
-<button onclick="v('-')">-</button><br>
+<button onclick="v('-')">-</button>
 <button onclick="v('1')">1</button>
 <button onclick="v('2')">2</button>
 <button onclick="v('3')">3</button>
-<button onclick="v('+')">+</button><br>
+<button onclick="v('+')">+</button>
 <button onclick="v('0')">0</button>
 <button onclick="v('.')">.</button>
 <button onclick="v('%')">%</button>
 <button class="eq" onclick="e()">=</button>
+</div>
 </div>
 <p>Made by Shaik Afzal ❤️</p>
 <script>
