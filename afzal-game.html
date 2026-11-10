@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Afzal Ka Game</title>
+<style>
+body{text-align:center;font-family:Arial;background:#1a1a2e;color:white;padding-top:40px}
+.box{background:white;color:black;padding:20px;border-radius:20px;width:320px;margin:auto}
+input{font-size:22px;padding:10px;width:120px;text-align:center;border-radius:10px}
+button{background:#ff5722;color:white;font-size:18px;padding:10px 20px;border:none;border-radius:10px;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>🎯 Afzal Ka Brain Game</h1>
+<div class="box">
+<p>Maine 1 se 100 tak number socha hai!</p>
+<p>Tries Left: <b id="tries">5</b></p>
+<input type="number" id="guess" placeholder="50"><br>
+<button onclick="check()">GUESS KARO!</button>
+<p id="msg">Chalo guess karo...</p>
+<button onclick="location.reload()">Naya Game 🔄</button>
+</div>
+<script>
+let secret=Math.floor(Math.random()*100)+1;
+let tries=5;
+function check(){
+let g=document.getElementById("guess").value;
+tries--;
+document.getElementById("tries").innerText=tries;
+if(g==secret){document.getElementById("msg").innerText="WAH! TU JEET GAYA! 🔥 Number tha "+secret;}
+else if(g<secret){document.getElementById("msg").innerText="Thoda BADA soch! 👆";}
+else{document.getElementById("msg").innerText="Thoda CHOTA soch! 👇";}
+if(tries==0 && g!=secret){document.getElementById("msg").innerText="Game Khatam! Mera number tha "+secret;}
+}
+</script>
+</body>
+</html>
