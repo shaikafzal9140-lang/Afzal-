@@ -1,106 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CASIO fx-991ES PLUS PRO - By Afzal</title>
-<style>
- body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center;background:#222;font-family:Arial;padding:10px}
- .casio{width:370px;background:#f3f3e8;border-radius:22px;padding:18px;border:2px solid #555;box-shadow:0 12px 0 #888,0 25px 40px #000}
- .top{display:flex;justify-content:space-between} .brand{font-size:24px;font-weight:900} .solar{width:135px;height:30px;background:repeating-linear-gradient(90deg,#331a1a,#331a1a 8px,#552a2a 8px,#552a2a 16px);border:2px solid #000;border-radius:3px}
- .name{font-size:12px;font-weight:bold;text-align:center;margin:8px 0}
- .screen{background:#9eb18f;border:3px solid #111;border-radius:7px;height:90px;padding:8px;display:flex;flex-direction:column;justify-content:space-between}
- .small{font-size:11px;min-height:14px;text-align:left;word-break:break-all} .big{font-size:26px;text-align:right;font-family:monospace}
- .nav{display:flex;justify-content:center;gap:8px;margin:14px 0} .nav div{width:42px;height:24px;background:#aab8cc;border-radius:10px;border:1px solid #555} .nav .c{width:58px;height:58px;border-radius:50%}
- .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
- .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
- button{border:none;border-radius:8px;padding:9px 1px;font-size:12px;font-weight:bold;cursor:pointer;box-shadow:0 3px 0 #0003} button:active{transform:translateY(2px)}
- .b{background:#222;color:#fff;font-size:11px} .w{background:#fff;color:#000;font-size:18px;padding:12px 1px} .o{background:#ff8f2e;color:#fff}
- #matrixBox{display:none;position:fixed;inset:0;background:#000a;justify-content:center;align-items:center;z-index:10}
- .box{background:#fff;padding:20px;border-radius:12px;width:300px}
- .box input{width:50px;padding:8px;margin:3px;text-align:center;font-size:16px}
- .box button{width:100%;padding:10px;margin-top:10px;background:#222;color:#fff}
-</style>
-</head>
-<body>
-<div class="casio">
- <div class="top"><span class="brand">CASIO</span><div class="solar"></div></div>
- <div class="name">fx-991ES PLUS - NATURAL-V.P.A.M. - By AFZAL</div>
- <div class="screen"><div class="small" id="topD">det(MatB) ready</div><div class="big" id="main">0</div></div>
- <div class="nav"><div></div><div></div><div class="c"></div><div></div><div></div></div>
- <div class="grid">
-  <button class="b" onclick="showMat()">Mat</button>
-  <button class="b" onclick="ins('∫dx')">∫dx</button>
-  <button class="b" onclick="ins('**-1')">x⁻¹</button>
-  <button class="b" onclick="ins('log10(')">log□</button>
-  <button class="b" onclick="ins('**2')">x²</button>
-  <button class="b" onclick="ins('Math.sqrt(')">√</button>
-  <button class="b" onclick="ins('(-)')">(-)</button>
-  <button class="b" onclick="ins('°')">°’”</button>
-  <button class="b" onclick="ins('')">hyp</button>
-  <button class="b" onclick="ins('Math.sin((Math.PI/180)*')">sin</button>
-  <button class="b" onclick="ins('Math.cos((Math.PI/180)*')">cos</button>
-  <button class="b" onclick="ins('Math.tan((Math.PI/180)*')">tan</button>
-  <button class="b" onclick="ins('')">RCL</button>
-  <button class="b" onclick="ins('')">ENG</button>
-  <button class="b" onclick="ins('(')">(</button>
-  <button class="b" onclick="ins(')')">)</button>
-  <button class="b" onclick="ins('')">S⇔D</button>
-  <button class="b" onclick="ins('')">M+</button>
- </div>
- <div class="grid5">
-  <button class="w" onclick="ins('7')">7</button><button class="w" onclick="ins('8')">8</button><button class="w" onclick="ins('9')">9</button><button class="o" onclick="del()">DEL</button><button class="o" onclick="ac()">AC</button>
-  <button class="w" onclick="ins('4')">4</button><button class="w" onclick="ins('5')">5</button><button class="w" onclick="ins('6')">6</button><button class="w" onclick="ins('*')">×</button><button class="w" onclick="ins('/')">÷</button>
-  <button class="w" onclick="ins('1')">1</button><button class="w" onclick="ins('2')">2</button><button class="w" onclick="ins('3')">3</button><button class="w" onclick="ins('+')">+</button><button class="w" onclick="ins('-')">-</button>
-  <button class="w" onclick="ins('0')">0</button><button class="w" onclick="ins('.')">.</button><button class="w" onclick="ins('*10**')">×10ˣ</button><button class="w" onclick="ins('Ans')">Ans</button><button class="w" style="background:#ccc" onclick="calc()">=</button>
- </div>
- <div style="text-align:center;font-size:10px;margin-top:12px">SITUATION MASTER 🔥 Afzal - PRO MATRIX MODE</div>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HKGN Transport - Hindupur</title>
+<style>body{font-family:sans-serif;background:#fff7ed;margin:0;text-align:center}header{background:#ea580c;color:#fff;padding:30px 15px}h1{margin:0;font-size:32px}.box{background:#fff;margin:15px;padding:20px;border-radius:15px;box-shadow:0 2px 10px #ddd}a{display:block;background:#16a34a;color:#fff;padding:15px;margin:10px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:18px}.call{background:#2563eb}</style>
+</head><body>
+<header><h1>HKGN Transport</h1><p>Hindupur - Andhra Pradesh</p><p>Mini Truck • Auto • Goods Transport</p></header>
+<div class="box"><h2>🚚 Hindupur Me Best Transport Service</h2><p>Shifting, Goods, Market Load, Sab Kuch Safe Aur Sasta!</p>
+<a class="call" href="tel:9140000000">📞 Call Karo - 9140000000</a>
+<a href="https://wa.me/919140000000">💬 WhatsApp Pe Book Karo</a>
 </div>
-
-<div id="matrixBox">
- <div class="box">
-  <h3 style="margin:0 0 10px">MatB - 3x3 Matrix (det nikalne ke liye)</h3>
-  <div>
-   <input id="m00" value="1"> <input id="m01" value="2"> <input id="m02" value="3"><br>
-   <input id="m10" value="0"> <input id="m11" value="4"> <input id="m12" value="5"><br>
-   <input id="m20" value="1"> <input id="m21" value="0"> <input id="m22" value="6">
-  </div>
-  <button onclick="calcDet()">det(MatB) Calculate</button>
-  <button onclick="closeMat()" style="background:#888">Close</button>
-  <div id="detRes" style="margin-top:10px;font-weight:bold;font-size:18px"></div>
- </div>
-</div>
-
-<script>
-let exp=''; let ansV=0;
-let topD=document.getElementById('topD'); let main=document.getElementById('main');
-function upd(){ main.textContent=exp||'0'; }
-function ins(v){ if(v==='Ans') v=ansV; exp+=v; upd(); }
-function ac(){ exp=''; topD.textContent=''; upd(); }
-function del(){ exp=exp.slice(0,-1); upd(); }
-function calc(){
- try{
-  let e=exp.replace(/log10\(/g,'Math.log10(');
-  // Prevent empty
-  if(!e) return;
-  let r=eval(e);
-  topD.textContent=exp+' =';
-  ansV=r; exp=r.toString(); upd();
- }catch{ main.textContent='Error'; exp=''; }
-}
-function showMat(){ document.getElementById('matrixBox').style.display='flex'; }
-function closeMat(){ document.getElementById('matrixBox').style.display='none'; }
-function calcDet(){
- let a=[
-  [parseFloat(m00.value),parseFloat(m01.value),parseFloat(m02.value)],
-  [parseFloat(m10.value),parseFloat(m11.value),parseFloat(m12.value)],
-  [parseFloat(m20.value),parseFloat(m21.value),parseFloat(m22.value)]
- ];
- let det = a[0][0]*(a[1][1]*a[2][2]-a[1][2]*a[2][1]) - a[0][1]*(a[1][0]*a[2][2]-a[1][2]*a[2][0]) + a[0][2]*(a[1][0]*a[2][1]-a[1][1]*a[2][0]);
- document.getElementById('detRes').innerText='det(MatB) = '+det;
- topD.textContent='det(MatB) = '+det; main.textContent=det; exp=det.toString(); ansV=det;
-}
-upd();
-</script>
-</body>
-</html>
+<div class="box"><h3>Hamari Service</h3><p>✅ Mini Truck Booking<br>✅ House Shifting<br>✅ Shop Goods Transport<br>✅ Hindupur To All AP</p></div>
+<p>HKGN Transport - Hindupur</p>
+</body></html>
