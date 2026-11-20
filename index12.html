@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HKGN TRANSPORT - Eicher Only</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:0;margin:0}
+.top{background:#232F3E;color:white;padding:14px;text-align:center}
+.top h1{margin:0;color:#FF9900;font-size:22px}
+.top .w{font-size:13px}
+.truckimg{width:100%;max-width:500px;display:block;margin:0 auto;border-radius:0}
+.truckbox{background:white;max-width:500px;margin:0 auto;padding:8px;text-align:center}
+.truckbox b{color:#0A7A42}
+.greenbar{background:#0A7A42;color:white;padding:8px;text-align:center;font-weight:bold;font-size:13px}
+.states{display:flex;gap:4px;padding:6px;background:#0A7A42}
+.states div{background:white;color:#0A7A42;flex:1;text-align:center;font-size:10px;font-weight:bold;padding:5px;border-radius:4px}
+.box{background:white;padding:14px;border-radius:12px;max-width:500px;margin:12px auto;box-shadow:0 0 10px #ccc}
+label{font-weight:bold;margin-top:11px;display:block;font-size:14px}
+input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:bold}
+.blue{background:#2196F3;color:white}
+.orange{background:#FF9900;color:white}
+.green{background:#25D366;color:white}
+.purple{background:#673AB7;color:white}
+.red{background:#E91E63;color:white}
+.result{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:12px;text-align:center;font-size:19px;font-weight:bold}
+.ratebox{border:2px solid #FFC107;border-radius:8px;padding:10px;margin-top:8px;display:flex;justify-content:space-between;font-weight:bold}
+.ratebox.g{border-color:#28A745}
+.ratebox.b{border-color:#0B5ED7}
+.small{font-size:12px;color:#666;text-align:center}
+.hist{background:#fff3e0;padding:10px;border-radius:8px;margin-top:8px;font-size:14px;border-left:4px solid #FF9900}
+h3{margin:0;text-align:center}
+</style>
+</head>
+<body>
+<div class="top"><h1>🚛 HKGN TRANSPORT</h1><div class="w">Hindupur No.1 | Afzal Basha - Owner<br>Call: 99632 59723 | 90140 49723</div></div>
+
+<!-- TERI PHOTO YAHAN AAYEGI -->
+<img class="truckimg" src="truck.jpg">
+<div class="truckbox"><b>🚛 HAMARI GADIYAAN - H.K.G.N - SALMA ROADLINES</b><br><span style="font-size:13px">AP02 Y 1413 | AP02 Y 4862 - Eicher - 10 Ton Passing</span></div>
+
+<div class="greenbar">WE GO EVERYWHERE - 5 STATES COVERED!</div>
+<div class="states"><div>ALL<br>ANDHRA</div><div>ALL<br>KARNATAKA</div><div>ALL<br>TELANGANA</div><div>ALL<br>TAMIL NADU</div><div>ALL<br>KERALA</div></div>
+
+<div class="box">
+<h3>🚛 Eicher Booking - Point to Point</h3>
+<label>Driver Ka Naam:</label>
+<input id="dname" placeholder="Afzal Shaik">
+<label>Driver Phone:</label>
+<input id="dphone" placeholder="9140XXXXXX">
+<label>Apna UPI ID:</label>
+<input id="upiid" value="afzal@okhdfc">
+
+<label>🚛 Eicher Gadi Chuno - Sirf Ye 3 Hai:</label>
+<select id="gadi">
+<option>Eicher - 6 Ton Passing</option>
+<option>Eicher - 8 Ton Passing</option>
+<option selected>Eicher - 10 Ton Passing</option>
+</select>
+
+<label>Pickup (Loading Point):</label>
+<input id="pickup" placeholder="Hindupur -> Bangalore">
+<button class="blue" onclick="getLoc('pickup')">📍 Pickup Location Lo</button>
+<label>Drop (Unloading Point):</label>
+<input id="drop" placeholder="Bangalore">
+<button class="blue" onclick="getLoc('drop')">📍 Drop Location Lo</button>
+
+<label>Company / Customer Ka Naam:</label>
+<input id="cname" placeholder="ABC Company, Hindupur">
+
+<label>Distance (KM):</label>
+<input id="km" type="number" placeholder="Ex: 100" oninput="calc()">
+<label>Rate Per KM - Teri Photo Wala Auto Aayega:</label>
+<input id="rate" type="number" value="90" readonly>
+
+<div class="result" id="total">Price: 100 KM x 90 Rs = 9000 Rs - Negotiable</div>
+<button class="orange" onclick="saveBooking()">✅ BOOK NOW</button>
+<button class="purple" onclick="payUPI()">💳 UPI Se Paisa Lo</button>
+<button class="red" onclick="liveTrack()">🛰️ LIVE TRACKING</button>
+<button class="green" onclick="bookWA()">📲 WhatsApp Par Bhejo</button>
+</div>
+
+<div class="box">
+<h3>📋 Bookings History</h3>
+<div id="list"><p class="small">Abhi koi booking nahi hai</p></div>
+<button class="blue" onclick="clearAll()">🗑️ Sab Clear Karo</button>
+</div>
+
+<div class="box">
+<h3>HKGN RATE CARD - EICHER ONLY - SAB NEGOTIABLE</h3>
+<div class="ratebox"><div>1. 0 - 150 KM<br><span style="font-size:12px;color:green">100 KM = Rs.9000</span></div><div>Rs.90 / KM</div></div>
+<div class="ratebox g"><div>2. 151 - 500 KM<br><span style="font-size:12px;color:green">200 KM = Rs.15000</span></div><div>Rs.75 / KM</div></div>
+<div class="ratebox b"><div>3. 500+ KM<br><span style="font-size:12px;color:green">600 KM = Rs.30000</span></div><div>Rs.50 / KM</div></div>
+<div style="background:#0A2540;color:white;padding:10px;border-radius:8px;margin-top:10px;text-align:center;font-size:13px">
+<b>HKGN TRANSPORT, HINDUPUR</b><br><span style="color:#FFD700">ALL AP | ALL KARNATAKA | ALL TELANGANA | ALL TN | ALL KERALA</span><br>📞 99632 59723 | 📞 90140 49723 | Afzal Basha
+</div>
+</div>
+
+<script>
+function getLoc(id){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      document.getElementById(id).value="Location: "+pos.coords.latitude.toFixed(5)+", "+pos.coords.longitude.toFixed(5);
+      window.open("https://www.google.com/maps?q="+pos.coords.latitude+","+pos.coords.longitude);
+    });
+  }
+}
+function getRate(km){ if(km<=150) return 90; if(km<=500) return 75; return 50; }
+function calc(){
+  let km=document.getElementById('km').value||0;
+  let rate=getRate(Number(km));
+  document.getElementById('rate').value=rate;
+  document.getElementById('total').innerText="Price: "+km+" KM x "+rate+" Rs = "+(km*rate)+" Rs - Negotiable";
+}
+function getData(){
+  let km=document.getElementById('km').value||0;
+  return {p:document.getElementById('pickup').value, d:document.getElementById('drop').value, km:km, rate:getRate(Number(km)), total:km*getRate(Number(km)), cn:document.getElementById('cname').value, dn:document.getElementById('dname').value, gadi:document.getElementById('gadi').value, upi:document.getElementById('upiid').value};
+}
+function saveBooking(){
+  let x=getData();
+  if(!x.p||!x.km){ alert("Pickup aur KM bharo!"); return; }
+  let arr=JSON.parse(localStorage.getItem('hkgn12')||'[]');
+  arr.push(x); localStorage.setItem('hkgn12',JSON.stringify(arr));
+  showList(); alert("Booking Done! "+x.gadi+" - Price: "+x.total+" Rs");
+}
+function showList(){
+  let arr=JSON.parse(localStorage.getItem('hkgn12')||'[]');
+  let h=document.getElementById('list');
+  if(arr.length==0){ h.innerHTML="<p class='small'>Abhi koi booking nahi hai</p>"; return; }
+  h.innerHTML=""; let sum=0;
+  arr.forEach(function(b,i){ sum+=Number(b.total); h.innerHTML+="<div class='hist'><b>"+(i+1)+". "+b.p+" ➡️ "+b.d+"</b><br>"+b.gadi+"<br>Customer: "+b.cn+" | "+b.km+" KM x "+b.rate+" Rs = <b>"+b.total+" Rs</b></div>"; });
+  h.innerHTML+="<div class='result'>Total Collection: "+sum+" Rs</div>";
+}
+function payUPI(){
+  let x=getData();
+  if(!x.total){ alert("Pehle KM daalo!"); return; }
+  window.location.href="upi://pay?pa="+x.upi+"&pn=HKGN Transport&am="+x.total+"&cu=INR&tn=Booking "+x.p+" to "+x.d;
+}
+function liveTrack(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let link="https://www.google.com/maps?q="+pos.coords.latitude+","+pos.coords.longitude;
+      window.open("https://wa.me/?text=LIVE TRACKING - Gadi Yahan Hai: "+link);
+    });
+  }
+}
+function bookWA(){
+  let x=getData();
+  let msg="HKGN TRANSPORT:%0A "+x.gadi+"%0A Company: "+x.cn+"%0A Pickup: "+x.p+"%0A Drop: "+x.d+"%0A KM: "+x.km+"%0A Total: "+x.total+" Rs - Negotiable";
+  window.open("https://wa.me/?text="+msg);
+}
+function clearAll(){ localStorage.removeItem('hkgn12'); showList(); }
+showList(); calc();
+</script>
+</body>
+</html>
