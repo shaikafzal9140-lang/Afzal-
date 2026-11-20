@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HKGN Transport - Hindupur | 4 TON TO 10 TON</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#fff;color:#222}
+.top{background:#0a2a5e;color:#fff;padding:12px 10px;text-align:center}
+.top h1{margin:0;font-size:32px}
+.top .y{color:#ffe600;font-size:13px;font-weight:bold}
+.top .s{font-size:11px}
+.top .c{font-size:13px;font-weight:bold;margin-top:4px}
+.truck{margin:8px;border:2px solid #ffb700}.truck img{width:100%;display:block}
+.cap{background:#000;color:#ffe600;text-align:center;padding:7px;font-size:11px;font-weight:bold}
+.states{background:#0a7a3a;color:#fff;text-align:center;padding:10px 5px;font-size:13px;font-weight:bold}
+.row{display:flex;gap:5px;justify-content:center;margin-top:8px}
+.box{background:#fff;color:#000;padding:8px 4px;flex:1;font-size:10px;font-weight:bold}
+.cards{display:flex;gap:8px;padding:10px}
+.card{background:#eaf2ff;border:2px solid #0a5ed7;border-radius:10px;padding:12px;flex:1}
+.card h3{background:#0a5ed7;color:#fff;margin:-12px -12px 10px;padding:9px;font-size:12px;text-align:center;border-radius:8px 8px 0 0}
+.card label{font-size:11px;font-weight:bold}
+.card input,.card select{width:100%;padding:9px;margin:3px 0 8px;border:1px solid #ccc;border-radius:6px;font-size:12px}
+.calc{background:#fff8d6;border:2px dashed #ffb700;padding:8px;border-radius:6px;text-align:center;margin:5px 0}
+.calc b{font-size:16px;color:#0a5ed7}
+.btn{display:block;text-align:center;background:#ffb700;color:#000;font-weight:bold;padding:10px;border-radius:6px;text-decoration:none;font-size:12px}
+.btn2{display:block;text-align:center;background:#0a7a3a;color:#fff;font-weight:bold;padding:8px;border-radius:6px;text-decoration:none;font-size:11px;margin-top:5px}
+.imp{background:#ff2e2e;color:#fff;padding:10px;margin:0 10px;border-radius:6px;text-align:center;font-size:12px}
+.rates{margin:10px}
+.rate{background:#fff;border:2px solid #ffb700;border-radius:6px;padding:9px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+.how{background:#fff8d6;border:2px solid #ffb700;margin:10px;padding:10px;border-radius:6px;font-size:12px}
+.footer{background:#0a2a5e;color:#fff;text-align:center;padding:12px;font-size:11px}
+a{color:#fff;text-decoration:none}
+@media(max-width:600px){.cards{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="top">
+<h1>HKGN TRANSPORT</h1>
+<div class="y">Hindupur No.1 Transport | 4 TON TO 10 TON VEHICLE</div>
+<div class="s">Afzal Basha - Owner</div>
+<div class="c">Call: <a href="tel:9963259723">99632 59723</a> | <a href="tel:9014049723">90140 49723</a></div>
+</div>
+<div class="truck"><img src="truck.jpg"><div class="cap">OUR VEHICLES - AP02 Y 1413 | AP02 Y 4862 - 4 TON TO 10 TON - SALMA ROADLINES</div></div>
+<div class="states">WE GO EVERYWHERE - 5 STATES COVERED!
+<div class="row"><div class="box">ALL<br>ANDHRA PRADESH</div><div class="box">ALL<br>KARNATAKA</div><div class="box">ALL<br>TELANGANA</div><div class="box">ALL<br>TAMIL NADU</div><div class="box">ALL<br>KERALA</div></div></div>
+
+<div class="cards">
+<div class="card"><h3>1. COMPANY BOOKING - AUTO PRICE</h3>
+<label>Company Name</label><input id="cname" placeholder="ABC Company, Hindupur">
+<label>Pickup - Kahan Se?</label>
+<select id="from" onchange="calc()">
+<option value="Hindupur">Hindupur</option><option value="Anantapur">Anantapur</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option><option value="Hyderabad">Hyderabad</option><option value="Vijayawada">Vijayawada</option><option value="Tirupati">Tirupati</option><option value="Coimbatore">Coimbatore</option><option value="Kochi">Kochi</option><option value="Mysore">Mysore</option><option value="Madurai">Madurai</option><option value="Nellore">Nellore</option><option value="Kurnool">Kurnool</option><option value="Warangal">Warangal</option>
+</select>
+<label>Drop - Kahan Tak?</label>
+<select id="to" onchange="calc()">
+<option value="Bangalore">Bangalore</option><option value="Hindupur">Hindupur</option><option value="Anantapur">Anantapur</option><option value="Chennai">Chennai</option><option value="Hyderabad">Hyderabad</option><option value="Vijayawada">Vijayawada</option><option value="Tirupati">Tirupati</option><option value="Coimbatore">Coimbatore</option><option value="Kochi">Kochi</option><option value="Mysore">Mysore</option><option value="Madurai">Madurai</option><option value="Nellore">Nellore</option><option value="Kurnool">Kurnool</option><option value="Warangal">Warangal</option>
+</select>
+<label>Kitna TON Chahiye? (4 Se 10 Tak)</label>
+<select id="ton" onchange="calc()">
+<option value="4">4 TON - Chhota Load</option>
+<option value="5">5 TON</option>
+<option value="6">6 TON</option>
+<option value="7">7 TON</option>
+<option value="8">8 TON</option>
+<option value="9">9 TON</option>
+<option value="10" selected>10 TON - Bada Load</option>
+</select>
+<div class="calc">
+Distance: <b id="kmShow">100 KM</b> | Rate: <b id="rateShow">Rs.90 / KM</b><br>
+Total Price: <b id="priceShow" style="font-size:20px;color:#ff2e2e">Rs.9000</b><br>
+<small>Negotiable - Final Rate Afzal Call Pe Batayega</small>
+</div>
+<a class="btn" href="#" onclick="bookNow();return false;">BOOK NOW ON WHATSAPP</a>
+<a class="btn2" href="#" onclick="googleMap();return false;">📍 GOOGLE MAP PE CHECK KARO - EXACT KM</a>
+</div>
+
+<div class="card"><h3>2. DRIVER REGISTER</h3>
+<label>Driver Name</label><input placeholder="Ramu - 98765...">
+<label>Vehicle No</label><input placeholder="AP 02 XX 1234">
+<label>Kitna TON Hai Teri Gadi?</label>
+<select><option>4 TON</option><option>5 TON</option><option>6 TON</option><option>7 TON</option><option>8 TON</option><option>9 TON</option><option selected>10 TON</option></select>
+<label>License</label><input placeholder="DL No. + Photo">
+<label>Available?</label><input placeholder="YES - Hindupur Area">
+<a class="btn" href="https://wa.me/919963259723?text=Hi%20HKGN%20-%20Driver%20Register%20karna%20hai">REGISTER NOW</a></div>
+
+<div class="card"><h3>3. AFZAL NOTIFICATION</h3>
+<p style="font-size:12px"><b>NEW BOOKING!</b><br><span id="noti">ABC Company Booked<br><b>Vehicle: 10 TON</b><br>Hindupur -> Bangalore<br><b>Price Rs.9000</b><br>100 KM x Rs.90 - Negotiable</span></p>
+<a class="btn" href="tel:9963259723">CALL AFZAL</a></div>
+</div>
+
+<div class="imp"><b>IMPORTANT: HAMARE PAAS 4 TON SE 10 TON TAK VEHICLE HAI</b><br>4, 5, 6, 7, 8, 9, 10 TON - Jo Chahiye Wo Milega!</div>
+<div class="rates">
+<h3 style="text-align:center;font-size:14px">HKGN RATE CARD - 4 TON TO 10 TON - SAB NEGOTIABLE</h3>
+<div class="rate"><div><b>10 TON - 0 to 150 KM</b><br><small>100 KM = Rs.9000</small></div><b>Rs.90 / KM</b></div>
+<div class="rate"><div><b>10 TON - 151 to 500 KM</b><br><small>200 KM = Rs.15000</small></div><b>Rs.75 / KM</b></div>
+<div class="rate"><div><b>10 TON - 500+ KM</b><br><small>600 KM = Rs.30000</small></div><b>Rs.50 / KM</b></div>
+<div class="rate"><div><b>4 TON - 0 to 150 KM</b><br><small>100 KM = Rs.3600</small></div><b>Rs.36 / KM</b></div>
+<div class="rate"><div><b>6 TON - 0 to 150 KM</b><br><small>100 KM = Rs.5400</small></div><b>Rs.54 / KM</b></div>
+</div>
+<div class="how"><h3>BOOKING KAISE HOGI? - AUTO PRICE!</h3>
+1. Company Pickup + Drop select karegi - Jaise Hindupur -> Bangalore<br>
+2. Automatic KM aa jayega - Google Map se check bhi kar sakte ho<br>
+3. TON select karte hi Price Automatic Calculate ho jayega!<br>
+4. Book karte hi Afzal ko Notification - Call karega - Rate Final karega<br>
+5. 4 TON se 10 TON tak Driver bhej dega - Sab Negotiable!</div>
+<div class="footer"><b>HKGN TRANSPORT, HINDUPUR - 4 TON TO 10 TON</b><br><span style="color:#ffe600">ALL AP | ALL KARNATAKA | ALL TELANGANA | ALL TN | ALL KERALA</span><br><br><a href="tel:9963259723">99632 59723</a> | <a href="tel:9014049723">90140 49723</a> | Afzal Basha</div>
+
+<script>
+// Distance Table - Hindupur se sab jagah ka KM - Google Map ke hisab se
+var dist = {
+"Hindupur-Bangalore":100,"Bangalore-Hindupur":100,
+"Hindupur-Anantapur":60,"Anantapur-Hindupur":60,
+"Hindupur-Chennai":280,"Chennai-Hindupur":280,
+"Hindupur-Hyderabad":380,"Hyderabad-Hindupur":380,
+"Hindupur-Vijayawada":450,"Vijayawada-Hindupur":450,
+"Hindupur-Tirupati":180,"Tirupati-Hindupur":180,
+"Hindupur-Coimbatore":300,"Coimbatore-Hindupur":300,
+"Hindupur-Kochi":550,"Kochi-Hindupur":550,
+"Hindupur-Mysore":220,"Mysore-Hindupur":220,
+"Hindupur-Madurai":430,"Madurai-Hindupur":430,
+"Hindupur-Nellore":320,"Nellore-Hindupur":320,
+"Hindupur-Kurnool":220,"Kurnool-Hindupur":220,
+"Hindupur-Warangal":470,"Warangal-Hindupur":470,
+"Bangalore-Chennai":350,"Chennai-Bangalore":350,
+"Bangalore-Hyderabad":570,"Hyderabad-Bangalore":570,
+"Bangalore-Mysore":150,"Mysore-Bangalore":150,
+"Bangalore-Coimbatore":360,"Coimbatore-Bangalore":360,
+"Bangalore-Tirupati":250,"Tirupati-Bangalore":250,
+"Anantapur-Bangalore":200,"Bangalore-Anantapur":200,
+"Anantapur-Hyderabad":350,"Hyderabad-Anantapur":350,
+"Chennai-Vijayawada":450,"Vijayawada-Chennai":450,
+"Hyderabad-Vijayawada":270,"Vijayawada-Hyderabad":270,
+"Hyderabad-Warangal":150,"Warangal-Hyderabad":150
+};
+function calc(){
+var f=document.getElementById('from').value;
+var t=document.getElementById('to').value;
+var ton=parseInt(document.getElementById('ton').value);
+var key=f+"-"+t;
+var km=dist[key] || 250; // agar list me nahi hai to 250 maan lo, Google se check karo
+var rate=0;
+if(km<=150) rate=ton*9;
+else if(km<=500) rate=ton*7.5;
+else rate=ton*5;
+var total=Math.round(km*rate);
+document.getElementById('kmShow').innerText=km+" KM";
+document.getElementById('rateShow').innerText="Rs."+rate+" / KM";
+document.getElementById('priceShow').innerText="Rs."+total;
+document.getElementById('noti').innerHTML="Company Booked<br><b>Vehicle: "+ton+" TON</b><br>"+f+" -> "+t+"<br><b>Price Rs."+total+"</b><br>"+km+" KM x Rs."+rate+" - Negotiable";
+return {f:f,t:t,ton:ton,km:km,rate:rate,total:total};
+}
+function bookNow(){
+var d=calc();
+var c=document.getElementById('cname').value || "Company";
+var msg="Hi HKGN - NEW BOOKING! Company: "+c+" | "+d.f+" -> "+d.t+" | Vehicle: "+d.ton+" TON | Distance: "+d.km+" KM | Price: Rs."+d.total+" (Rs."+d.rate+"/KM) Negotiable";
+window.open("https://wa.me/919963259723?text="+encodeURIComponent(msg),"_blank");
+}
+function googleMap(){
+var f=document.getElementById('from').value;
+var t=document.getElementById('to').value;
+window.open("https://www.google.com/maps/dir/"+encodeURIComponent(f)+"/"+encodeURIComponent(t),"_blank");
+}
+calc();
+</script>
+</body>
+  </html>
