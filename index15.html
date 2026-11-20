@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HKGN TRANSPORT - Amazon Style</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:0;margin:0}
+.top{background:#232F3E;color:white;padding:14px;text-align:center}
+.top h1{margin:0;color:#FF9900;font-size:24px}
+.top .w{font-size:13px}
+.searchbar{background:#232F3E;padding:0 10px 10px;display:flex;gap:5px;max-width:500px;margin:0 auto}
+.searchbar input{flex:1;padding:11px;border-radius:8px;border:none}
+.searchbar button{background:#FF9900;border:none;padding:11px 14px;border-radius:8px;font-weight:bold}
+.truckimg{width:100%;max-width:500px;display:block;margin:0 auto}
+.truckbox{background:white;max-width:500px;margin:0 auto;padding:8px;text-align:center}
+.greenbar{background:#0A7A42;color:white;padding:8px;text-align:center;font-weight:bold;font-size:13px}
+.states{display:flex;gap:4px;padding:6px;background:#0A7A42}
+.states div{background:white;color:#0A7A42;flex:1;text-align:center;font-size:10px;font-weight:bold;padding:5px;border-radius:4px}
+.box{background:white;padding:14px;border-radius:12px;max-width:500px;margin:12px auto;box-shadow:0 0 10px #ccc}
+label{font-weight:bold;margin-top:11px;display:block;font-size:14px}
+input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:15px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:bold}
+.blue{background:#2196F3;color:white}
+.orange{background:#FF9900;color:white}
+.green{background:#25D366;color:white}
+.purple{background:#673AB7;color:white}
+.red{background:#E91E63;color:white}
+.black{background:#333;color:white}
+.result{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:12px;text-align:center;font-size:19px;font-weight:bold}
+.ratebox{border:2px solid #FFC107;border-radius:8px;padding:10px;margin-top:8px;display:flex;justify-content:space-between;font-weight:bold}
+.small{font-size:12px;color:#666;text-align:center}
+.hist{background:#fff3e0;padding:10px;border-radius:8px;margin-top:8px;font-size:14px;border-left:4px solid #FF9900}
+.hist2{background:#e3f2fd;padding:10px;border-radius:8px;margin-top:8px;font-size:14px;border-left:4px solid #2196F3}
+h3{margin:0;text-align:center}
+.track{display:flex;justify-content:space-between;margin-top:10px;font-size:11px;text-align:center}
+.track div{flex:1}
+.dot{width:28px;height:28px;border-radius:50%;background:#ddd;margin:0 auto;line-height:28px;font-weight:bold}
+.dot.on{background:#FF9900;color:white}
+.stars{font-size:28px;text-align:center;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top"><h1>🚛 HKGN TRANSPORT</h1><div class="w">Hindupur No.1 | Afzal Basha - Owner<br>Call: 99632 59723 | 90140 49723</div>
+<div class="searchbar"><input id="search" placeholder="🔍 Booking Search Karo - Company Naam / Order ID..."><button onclick="searchBooking()">Search</button></div>
+</div>
+<img class="truckimg" src="truck.jpg">
+<div class="truckbox"><b>🚛 HAMARI GADIYAAN - H.K.G.N</b><br><span style="font-size:13px">AP02 Y 1413 | AP02 Y 4862 - Eicher - 10 Ton Passing</span><br>⭐⭐⭐⭐⭐ <b>4.9 Rating - 500+ Happy Customers</b></div>
+<div class="greenbar">WE GO EVERYWHERE - 5 STATES COVERED!</div>
+<div class="states"><div>ALL<br>ANDHRA</div><div>ALL<br>KARNATAKA</div><div>ALL<br>TELANGANA</div><div>ALL<br>TAMIL NADU</div><div>ALL<br>KERALA</div></div>
+
+<div class="box">
+<h3>📦 TRACK YOUR BOOKING - Amazon Jaisa</h3>
+<p class="small">Order ID daalo - Gadi kahan hai pata chal jayega!</p>
+<label>Order ID / Company Naam Daalo:</label>
+<input id="trackId" placeholder="Ex: HKGN1234 ya TVS">
+<button class="orange" onclick="trackOrder()">📦 TRACK KARO</button>
+<div id="trackResult"></div>
+</div>
+
+<div class="box">
+<h3>🚛 COMPANY BOOKING - Gadi Book Karo</h3>
+<p class="small">Company ko sirf ye bharna hai - Driver ka detail nahi!</p>
+<label>Company / Party Ka Naam:</label>
+<input id="cname" placeholder="Ex: TVS, Hindupur">
+<label>Company Ka Phone Number:</label>
+<input id="cphone" placeholder="Ex: 98765 43210">
+<label>🚛 Kitne Ton Ki Gadi Chahiye? - Sirf Eicher:</label>
+<select id="gadi"><option>Eicher - 6 Ton Passing</option><option>Eicher - 8 Ton Passing</option><option selected>Eicher - 10 Ton Passing</option></select>
+<label>Pickup - Maal Kahan Se Uthana Hai?</label>
+<input id="pickup" placeholder="Ex: TVS Factory, Hindupur">
+<button class="blue" onclick="getLoc('pickup')">📍 Pickup Location Lo</button>
+<label>Drop - Maal Kahan Pahunchana Hai?</label>
+<input id="drop" placeholder="Ex: Bangalore">
+<button class="blue" onclick="getLoc('drop')">📍 Drop Location Lo</button>
+<label>Distance (KM):</label>
+<input id="km" type="number" placeholder="Ex: 100" oninput="calc()">
+<label>Rate Per KM - Auto Aayega:</label>
+<input id="rate" type="number" value="90" readonly>
+<div class="result" id="total">Price: 100 KM x 90 Rs = 9000 Rs - Negotiable</div>
+<button class="orange" onclick="saveBooking()">✅ BOOK NOW - Order ID Milega</button>
+<button class="green" onclick="bookWA()">📲 WhatsApp Par Afzal Ko Bhejo</button>
+<button class="black" onclick="callAfzal()">📞 Afzal Ko Call Karo</button>
+</div>
+
+<div class="box">
+<h3>🔒 AFZAL KA SECTION - Driver + Status</h3>
+<p class="small">Sirf Afzal - Driver assign + Status badlega!</p>
+<label>Order ID - Kis Booking Ka?</label>
+<input id="oid" placeholder="Ex: HKGN1234">
+<label>Driver Ka Naam:</label>
+<input id="dname" placeholder="Ex: Ramesh">
+<label>Driver Phone:</label>
+<input id="dphone" placeholder="Ex: 98765 43210">
+<label>Gadi Ka Number:</label>
+<select id="vno"><option>AP02 Y 1413 - Eicher</option><option>AP02 Y 4862 - Eicher</option></select>
+<label>Status Badlo - Amazon Jaisa:</label>
+<select id="status"><option>✅ Booked - Booking Ho Gayi</option><option>🚛 Driver Assigned - Driver Bhej Diya</option><option>📦 Pickup Done - Maal Utha Liya</option><option>🛣️ On The Way - Raste Me Hai</option><option>🎉 Delivered - Maal Pahunch Gaya</option></select>
+<button class="purple" onclick="assignDriver()">🚛 Driver + Status Update Karo</button>
+<div id="driverInfo"></div>
+</div>
+
+<div class="box">
+<h3>📋 Meri Bookings - Amazon Order List Jaisa</h3>
+<div id="list"><p class="small">Abhi koi booking nahi hai</p></div>
+<button class="red" onclick="clearAll()">🗑️ Sab Clear Karo</button>
+</div>
+
+<div class="box">
+<h3>⭐ Rating Do - Amazon Jaisa</h3>
+<p class="small">Company ko service kaisi lagi? Star do!</p>
+<div class="stars" id="stars">⭐⭐⭐⭐⭐</div>
+<button class="orange" onclick="giveRating()">⭐ Rating Bhejo</button>
+<div id="rateMsg"></div>
+</div>
+
+<div class="box">
+<h3>HKGN RATE CARD - EICHER ONLY - SAB NEGOTIABLE</h3>
+<div class="ratebox"><div>1. 0 - 150 KM<br><span style="font-size:12px;color:green">100 KM = Rs.9000</span></div><div>Rs.90 / KM</div></div>
+<div class="ratebox"><div>2. 151 - 500 KM<br><span style="font-size:12px;color:green">200 KM = Rs.15000</span></div><div>Rs.75 / KM</div></div>
+<div class="ratebox"><div>3. 500+ KM<br><span style="font-size:12px;color:green">600 KM = Rs.30000</span></div><div>Rs.50 / KM</div></div>
+<button class="green" onclick="rateWA()">📲 Rate Card WhatsApp Pe Bhejo</button>
+</div>
+
+<script>
+function getLoc(id){ if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(function(pos){ document.getElementById(id).value="Location: "+pos.coords.latitude.toFixed(5)+", "+pos.coords.longitude.toFixed(5); window.open("https://www.google.com/maps?q="+pos.coords.latitude+","+pos.coords.longitude); }); } }
+function getRate(km){ if(km<=150) return 90; if(km<=500) return 75; return 50; }
+function calc(){ let km=document.getElementById('km').value||0; let rate=getRate(Number(km)); document.getElementById('rate').value=rate; document.getElementById('total').innerText="Price: "+km+" KM x "+rate+" Rs = "+(km*rate)+" Rs - Negotiable"; }
+function getData(){ let km=document.getElementById('km').value||0; return {id:"HKGN"+Math.floor(1000+Math.random()*9000), c:document.getElementById('cname').value, ph:document.getElementById('cphone').value, p:document.getElementById('pickup').value, d:document.getElementById('drop').value, km:km, rate:getRate(Number(km)), total:km*getRate(Number(km)), gadi:document.getElementById('gadi').value, status:"✅ Booked", driver:"Abhi Assign Nahi Hua", time:new Date().toLocaleString('en-IN')}; }
+function saveBooking(){ let x=getData(); if(!x.c||!x.p||!x.km){ alert("Company Naam, Pickup aur KM bharo!"); return; } let arr=JSON.parse(localStorage.getItem('hkgn15')||'[]'); arr.push(x); localStorage.setItem('hkgn15',JSON.stringify(arr)); showList(); alert("Booking Ho Gayi! Tera Order ID: "+x.id+" - Isko Note Kar Lo! Afzal Call Karega!"); }
+function showList(){ let arr=JSON.parse(localStorage.getItem('hkgn15')||'[]'); let h=document.getElementById('list'); if(arr.length==0){ h.innerHTML="<p class='small'>Abhi koi booking nahi hai</p>"; return; } h.innerHTML=""; let sum=0; arr.forEach(function(b,i){ sum+=Number(b.total); h.innerHTML+="<div class='hist'><b>"+(i+1)+". Order ID: "+b.id+"</b><br>"+b.c+" - "+b.ph+"<br>"+b.gadi+"<br>"+b.p+" ➡️ "+b.d+"<br>"+b.km+" KM = <b>"+b.total+" Rs</b><br>Status: "+b.status+"<br>Driver: "+b.driver+"<br>"+b.time+"</div>"; }); h.innerHTML+="<div class='result'>Total Collection: "+sum+" Rs</div>"; }
+function assignDriver(){ let oid=document.getElementById('oid').value; let n=document.getElementById('dname').value; let ph=document.getElementById('dphone').value; let v=document.getElementById('vno').value; let st=document.getElementById('status').value; if(!oid||!n){ alert("Order ID aur Driver Naam likho!"); return; } let arr=JSON.parse(localStorage.getItem('hkgn15')||'[]'); let found=false; arr.forEach(function(b){ if(b.id==oid || b.c.toLowerCase().includes(oid.toLowerCase())){ b.driver=n+" - "+ph+" - "+v; b.status=st; found=true; } }); localStorage.setItem('hkgn15',JSON.stringify(arr)); showList(); document.getElementById('driverInfo').innerHTML="<div class='hist2'><b>Update Ho Gaya!</b><br>Order: "+oid+"<br>Driver: "+n+"<br>Gadi: "+v+"<br>Status: "+st+"</div>"; if(!found) alert("Order ID nahi mila! Pehle Booking karo, phir Driver assign karo!"); else alert("Driver Assign + Status Update Ho Gaya!"); }
+function trackOrder(){ let q=document.getElementById('trackId').value; if(!q){ alert("Order ID daalo!"); return; } let arr=JSON.parse(localStorage.getItem('hkgn15')||'[]'); let b=arr.find(x=>x.id==q || x.c.toLowerCase().includes(q.toLowerCase())); let h=document.getElementById('trackResult'); if(!b){ h.innerHTML="<p class='small'>Order nahi mila! Order ID sahi daalo!</p>"; return; } let steps=["✅ Booked","🚛 Driver Assigned","📦 Pickup Done","🛣️ On The Way","🎉 Delivered"]; let cur=steps.findIndex(s=>b.status.includes(s.split(' ')[1])||b.status==s); if(cur<0) cur=0; let html="<div class='hist2'><b>Order: "+b.id+" - "+b.c+"</b><br>"+b.p+" ➡️ "+b.d+"<br>Driver: "+b.driver+"<br>Status: "+b.status+"</div><div class='track'>"; steps.forEach(function(s,i){ html+="<div><div class='dot "+(i<=cur?'on':'')+"'>"+(i<=cur?'✓':'○')+"</div>"+s+"</div>"; }); html+="</div>"; h.innerHTML=html; }
+function searchBooking(){ let q=document.getElementById('search').value; document.getElementById('trackId').value=q; trackOrder(); window.scrollTo(0,0); }
+function giveRating(){ document.getElementById('rateMsg').innerHTML="<div class='result'>⭐⭐⭐⭐⭐ Dhanyavaad! Aapne 5 Star Diya! HKGN ko phir yaad karna!</div>"; }
+function bookWA(){ let x=getData(); let msg="HKGN NEW BOOKING:%0A Company: "+x.c+" - "+x.ph+"%0A "+x.gadi+"%0A Pickup: "+x.p+"%0A Drop: "+x.d+"%0A KM: "+x.km+"%0A Total: "+x.total+" Rs - Negotiable"; window.open("https://wa.me/919963259723?text="+msg); }
+function rateWA(){ window.open("https://wa.me/919963259723?text=HKGN RATE CARD - 0-150 KM=90 Rs/KM, 151-500 KM=75 Rs/KM, 500+=50 Rs/KM - Call Afzal: 9963259723"); }
+function callAfzal(){ window.open("tel:9963259723"); }
+function clearAll(){ if(confirm("Sab clear kar du?")){ localStorage.removeItem('hkgn15'); showList(); } }
+showList(); calc();
+</script>
+</body>
+</html>
