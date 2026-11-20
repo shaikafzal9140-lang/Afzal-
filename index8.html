@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afzal Logistics - Full App</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:0;margin:0}
+.top{background:#232F3E;color:white;padding:15px;text-align:center}
+.top h2{margin:0;color:#FF9900}
+.box{background:white;padding:15px;border-radius:12px;max-width:480px;margin:15px auto;box-shadow:0 0 10px #ccc}
+label{font-weight:bold;margin-top:12px;display:block}
+input,select{width:100%;padding:11px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-size:16px;cursor:pointer}
+.blue{background:#2196F3;color:white}
+.orange{background:#FF9900;color:white;font-weight:bold}
+.green{background:#25D366;color:white;font-weight:bold}
+.purple{background:#673AB7;color:white;font-weight:bold}
+.red{background:#E91E63;color:white;font-weight:bold}
+.result{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:15px;text-align:center;font-size:19px;font-weight:bold}
+.hist{background:#fff3e0;padding:10px;border-radius:8px;margin-top:8px;font-size:14px;border-left:4px solid #FF9900}
+.small{font-size:13px;color:#666;text-align:center}
+</style>
+</head>
+<body>
+<div class="top"><h2>🚛 AFZAL LOGISTICS</h2><div>Hindupur to All India - Point to Point</div></div>
+
+<div class="box">
+<h3 style="text-align:center;margin:0">👤 Driver Login</h3>
+<label>Driver Ka Naam:</label>
+<input id="dname" placeholder="Ex: Afzal Shaik">
+<label>Driver Phone:</label>
+<input id="dphone" placeholder="Ex: 9140XXXXXX">
+<label>Apna UPI ID (Paisa lene ke liye):</label>
+<input id="upiid" placeholder="Ex: afzal@okhdfc - Apna UPI yahan likho" value="afzal@okhdfc">
+
+<label>Gadi Chuno:</label>
+<select id="gadi">
+<option value="15">🛺 Auto - 15 Rs / KM</option>
+<option value="18">🚙 Bolero - 18 Rs / KM</option>
+<option value="12">🚐 Tata Ace - 12 Rs / KM</option>
+<option value="25">🚚 Truck - 25 Rs / KM</option>
+</select>
+
+<label>Pickup (Loading):</label>
+<input id="pickup" placeholder="Ex: Gandhi Circle, Hindupur">
+<button class="blue" onclick="getLoc('pickup')">📍 Pickup Location Lo</button>
+
+<label>Drop (Unloading):</label>
+<input id="drop" placeholder="Ex: Supari Gali, Hindupur">
+<button class="blue" onclick="getLoc('drop')">📍 Drop Location Lo</button>
+
+<label>Distance (KM):</label>
+<input id="km" type="number" placeholder="Ex: 20" oninput="calc()">
+<label>Rate Per KM (Rs):</label>
+<input id="rate" type="number" value="15" oninput="calc()">
+<label>Customer Ka Naam:</label>
+<input id="cname" placeholder="Ex: Ramesh">
+
+<div class="result" id="total">Total Paisa: 0 Rs</div>
+
+<button class="orange" onclick="saveBooking()">✅ Booking Confirm Karo</button>
+<button class="purple" onclick="payUPI()">💳 UPI Se Paisa Lo - PhonePe / GPay</button>
+<button class="red" onclick="liveTrack()">🛰️ LIVE TRACKING - Live Location Bhejo</button>
+<button class="green" onclick="bookWA()">📲 WhatsApp Par Booking Bhejo</button>
+<p class="small">UPI dabate hi PhonePe khulega, Paisa apne aap bhara hoga!</p>
+</div>
+
+<div class="box">
+<h3 style="text-align:center;margin:0">📋 Aaj Ki Bookings - History</h3>
+<div id="list"></div>
+<button class="blue" onclick="clearAll()">🗑️ Sab Clear Karo</button>
+</div>
+
+<script>
+function getLoc(id){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat=pos.coords.latitude, lon=pos.coords.longitude;
+      document.getElementById(id).value="Location: "+lat.toFixed(5)+", "+lon.toFixed(5);
+      window.open("https://www.google.com/maps?q="+lat+","+lon);
+    });
+  } else { alert("Location nahi mil rahi"); }
+}
+function calc(){
+  let km=document.getElementById('km').value||0;
+  let rate=document.getElementById('rate').value||0;
+  document.getElementById('total').innerText="Total Paisa: "+(km*rate)+" Rs  ("+km+" KM x "+rate+" Rs)";
+}
+document.getElementById('gadi').addEventListener('change',function(){ document.getElementById('rate').value=this.value; calc(); });
+function getData(){
+  return {p:document.getElementById('pickup').value, d:document.getElementById('drop').value, km:document.getElementById('km').value, rate:document.getElementById('rate').value, total:(document.getElementById('km').value||0)*(document.getElementById('rate').value||0), dn:document.getElementById('dname').value, cn:document.getElementById('cname').value, upi:document.getElementById('upiid').value};
+}
+function saveBooking(){
+  let x=getData();
+  if(!x.p||!x.d||!x.km){ alert("Pickup, Drop aur KM bharo!"); return; }
+  let arr=JSON.parse(localStorage.getItem('bookings')||'[]');
+  arr.push(x); localStorage.setItem('bookings',JSON.stringify(arr));
+  showList(); alert("Booking Save Ho Gayi! Total: "+x.total+" Rs");
+}
+function showList(){
+  let arr=JSON.parse(localStorage.getItem('bookings')||'[]');
+  let h=document.getElementById('list');
+  if(arr.length==0){ h.innerHTML="<p class='small'>Abhi koi booking nahi hai</p>"; return; }
+  h.innerHTML=""; let sum=0;
+  arr.forEach(function(b,i){ sum+=Number(b.total); h.innerHTML+="<div class='hist'><b>"+(i+1)+". "+b.p+" ➡️ "+b.d+"</b><br>Customer: "+b.cn+" | Driver: "+b.dn+"<br>KM: "+b.km+" | Total: <b>"+b.total+" Rs</b></div>"; });
+  h.innerHTML+="<div class='result'>Aaj Ka Total Collection: "+sum+" Rs</div>";
+}
+function payUPI(){
+  let x=getData();
+  if(!x.total||x.total==0){ alert("Pehle KM daalo!"); return; }
+  if(!x.upi){ alert("UPI ID daalo!"); return; }
+  let upiLink="upi://pay?pa="+x.upi+"&pn=Afzal Logistics&am="+x.total+"&cu=INR&tn=Booking "+x.p+" to "+x.d;
+  window.location.href=upiLink;
+  setTimeout(function(){ alert("Agar PhonePe nahi khula to UPI ID copy karke pay karo: "+x.upi+" - Amount: "+x.total+" Rs"); },1000);
+}
+function liveTrack(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let link="https://www.google.com/maps?q="+pos.coords.latitude+","+pos.coords.longitude;
+      let msg="LIVE TRACKING - Afzal Logistics:%0A Meri Gadi Yahan Hai:%0A "+link+"%0A Driver: "+document.getElementById('dname').value;
+      window.open("https://wa.me/?text="+msg);
+      alert("WhatsApp khul gaya! Customer ko bhej do, wo Map pe dekh lega gadi kahan hai!");
+    });
+  } else { alert("Location ON karo"); }
+}
+function bookWA(){
+  let x=getData();
+  let msg="AFZAL LOGISTICS:%0A Driver: "+x.dn+"%0A Customer: "+x.cn+"%0A Pickup: "+x.p+"%0A Drop: "+x.d+"%0A Distance: "+x.km+" KM%0A Total: "+x.total+" Rs";
+  window.open("https://wa.me/?text="+msg);
+}
+function clearAll(){ localStorage.removeItem('bookings'); showList(); }
+showList(); calc();
+</script>
+</body>
+</html>
