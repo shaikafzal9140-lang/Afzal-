@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gadi Booking - Point to Point</title>
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:15px}
+.box{background:white;padding:15px;border-radius:12px;max-width:450px;margin:auto;box-shadow:0 0 10px #ccc}
+h2{text-align:center;color:#075E54}
+label{font-weight:bold;margin-top:12px;display:block}
+input,select{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+button{width:100%;padding:12px;margin-top:10px;border:none;border-radius:8px;font-size:16px;cursor:pointer}
+.blue{background:#2196F3;color:white}
+.green{background:#25D366;color:white;font-weight:bold}
+.result{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:15px;text-align:center;font-size:18px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🚛 Gadi Booking</h2>
+
+<label>Gadi Chuno:</label>
+<select id="gadi">
+<option value="15">Auto - 15 Rs / KM</option>
+<option value="18">Bolero - 18 Rs / KM</option>
+<option value="25">Truck - 25 Rs / KM</option>
+<option value="12">Tata Ace - 12 Rs / KM</option>
+</select>
+
+<label>Pickup Location (Loading):</label>
+<input id="pickup" placeholder="Ex: Gandhi Circle, Hindupur">
+<button class="blue" onclick="getLoc('pickup')">📍 Meri Pickup Location Lo</button>
+
+<label>Drop Location (Unloading):</label>
+<input id="drop" placeholder="Ex: Supari Gali, Hindupur">
+<button class="blue" onclick="getLoc('drop')">📍 Drop Location Lo</button>
+
+<label>Distance (KM) - Point to Point:</label>
+<input id="km" type="number" placeholder="Ex: 20" oninput="calc()">
+
+<label>Rate Per KM (Rs):</label>
+<input id="rate" type="number" value="15" oninput="calc()">
+
+<div class="result" id="total">Total Paisa: 0 Rs</div>
+
+<button class="green" onclick="book()">✅ WhatsApp Par Booking Bhejo</button>
+<p style="text-align:center;font-size:13px;color:#666">Pickup se Drop tak ka KM daalo, Paisa apne aap nikal jayega!</p>
+</div>
+
+<script>
+function getLoc(id){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat=pos.coords.latitude;
+      let lon=pos.coords.longitude;
+      document.getElementById(id).value="Location: "+lat.toFixed(5)+", "+lon.toFixed(5);
+      alert("Location mil gayi! Ab Google Map me khol ke KM dekh lo");
+      window.open("https://www.google.com/maps?q="+lat+","+lon);
+    });
+  } else { alert("Location nahi mil rahi"); }
+}
+function calc(){
+  let km=document.getElementById('km').value||0;
+  let rate=document.getElementById('rate').value||0;
+  document.getElementById('total').innerText="Total Paisa: "+(km*rate)+" Rs  ("+km+" KM x "+rate+" Rs)";
+  // Gadi ke hisab se rate badlo
+}
+document.getElementById('gadi').addEventListener('change',function(){
+  document.getElementById('rate').value=this.value;
+  calc();
+});
+function book(){
+  let p=document.getElementById('pickup').value;
+  let d=document.getElementById('drop').value;
+  let km=document.getElementById('km').value;
+  let rate=document.getElementById('rate').value;
+  let total=km*rate;
+  let msg="GADI BOOKING:%0A Pickup: "+p+"%0A Drop: "+d+"%0A Distance: "+km+" KM%0A Rate: "+rate+" Rs/KM%0A Total: "+total+" Rs";
+  window.open("https://wa.me/?text="+msg);
+}
+</script>
+</body>
+</html>
